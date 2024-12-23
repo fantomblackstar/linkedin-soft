@@ -14,10 +14,10 @@ async function sleep(ms = 1000) {
 }
 
 async function clickNextPage(attempt = 1) {
-  if (attempt > 10)  return;
-  
+  if (attempt > 100) return;
+
   const nextButton = document.querySelector(NEXT_TEXT_ARIA_LABEL);
-  console.log(`Переходимо на наступну сторінку\nСпроба: ${attempt}/10`);
+  console.log(`Переходимо на наступну сторінку\nСпроба: ${attempt}/100`);
   if (nextButton) {
     nextButton.click();
     await sleep(5000);
@@ -62,7 +62,10 @@ async function clickConnectButtons() {
     }
 
     if (connectionsMade >= MAX_CONNECTIONS_COUNT) {
-      console.log(`Досягнуто максилальну кількість запрошень:`, MAX_CONNECTIONS_COUNT);
+      console.log(
+        `Досягнуто максилальну кількість запрошень:`,
+        MAX_CONNECTIONS_COUNT
+      );
       return;
     }
   }
