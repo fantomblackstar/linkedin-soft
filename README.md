@@ -20,6 +20,7 @@ This script supports both English and Ukrainian, depending on the language setti
 
 1. **Find People to Connect With**:
    Use the LinkedIn search to find profiles of people you want to send connection invitations to.
+   
    <img width="460" alt="Знімок екрана 2024-12-22 о 19 10 33" src="https://github.com/user-attachments/assets/8f6dfdf0-cc49-47c4-929a-a32f2760f0f6" />
 
 3. **Open Your Browser Console**
