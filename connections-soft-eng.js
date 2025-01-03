@@ -29,6 +29,13 @@ async function clickNextPage(attempt = 1) {
   }
 }
 
+function scrollToBottom() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  });
+}
+
 async function clickConnectButtons() {
   const buttons = document.querySelectorAll(BUTTON_CLASS);
 
@@ -68,6 +75,7 @@ async function clickConnectButtons() {
     }
   }
 
+  scrollToBottom();
   clickNextPage();
 }
 
