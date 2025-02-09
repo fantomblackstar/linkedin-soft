@@ -9,6 +9,7 @@ const NEXT_TEXT_ARIA_LABEL = "[aria-label='Next']";
 const MAX_CONNECTIONS_H2_ID = "#ip-fuse-limit-alert__header";
 const REACHED_MAX_CONNECTIONS_TEXT =
   "You’ve reached the weekly invitation limit";
+const DISMISS_TEXT_ARIA_LABEL = "[aria-label='Dismiss']";
 
 async function sleep(ms = 1000) {
   return new Promise((resolve) => setTimeout(resolve, ms));

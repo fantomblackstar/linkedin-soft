@@ -8,6 +8,7 @@ const GOT_IT_TEXT_ARIA_LABEL = "[aria-label='Зрозуміло']";
 const NEXT_TEXT_ARIA_LABEL = "[aria-label='Вперед']";
 const MAX_CONNECTIONS_H2_ID = "#ip-fuse-limit-alert__header";
 const REACHED_MAX_CONNECTIONS_TEXT = "Ви досягли тижневого ліміту запрошень";
+const DISMISS_TEXT_ARIA_LABEL = "[aria-label='Пропустити']";
 
 async function sleep(ms = 1000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
