@@ -1,15 +1,10 @@
 let connectionsMade = 0;
 const MAX_CONNECTIONS_COUNT = 100;
 
-const BUTTON_CLASS = ".artdeco-button__text";
-const CONNECT = "Connect";
-const SEND_NOW_TEXT_ARIA_LABEL = "[aria-label='Send without a note']";
-const GOT_IT_TEXT_ARIA_LABEL = "[aria-label='Got it']";
-const NEXT_TEXT_ARIA_LABEL = "[aria-label='Next']";
-const MAX_CONNECTIONS_H2_ID = "#ip-fuse-limit-alert__header";
-const REACHED_MAX_CONNECTIONS_TEXT =
-  "You’ve reached the weekly invitation limit";
-const DISMISS_TEXT_ARIA_LABEL = "[aria-label='Dismiss']";
+const CONNECT_BUTTON_SELECTOR = "button[aria-label*='to connect']";
+const NEXT_BUTTON_SELECTOR =
+  "button[data-testid='pagination-controls-next-button-visible']";
+const MAX_CONNECTIONS_ALERT_SELECTOR = "div[role='alert']";
 
 async function sleep(ms = 1000) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -18,7 +13,7 @@ async function sleep(ms = 1000) {
 async function clickNextPage(attempt = 1) {
   if (attempt > 100) return;
 
-  const nextButton = document.querySelector(NEXT_TEXT_ARIA_LABEL);
+  const nextButton = document.querySelector(NEXT_BUTTON_SELECTOR);
   console.log(`Going to the next page\nAttempt: ${attempt}/100`);
   if (nextButton) {
     nextButton.click();
@@ -38,40 +33,24 @@ function scrollToBottom() {
 }
 
 async function clickConnectButtons() {
-  const buttons = document.querySelectorAll(BUTTON_CLASS);
+  const buttons = document.querySelectorAll(CONNECT_BUTTON_SELECTOR);
 
   for (let button of buttons) {
-    if (button.innerText !== CONNECT) {
-      continue;
-    }
-
     button.click();
     await sleep();
 
-    const sendNowButton = document.querySelector(SEND_NOW_TEXT_ARIA_LABEL);
-    if (sendNowButton?.disabled) {
-      const dismissButton = document.querySelector(DISMISS_TEXT_ARIA_LABEL);
-      dismissButton.click();
-    } else if (sendNowButton) {
-      sendNowButton.click();
-      connectionsMade++;
-      await sleep();
-    }
+    const maxConnectionsAlert = document.querySelector(
+      MAX_CONNECTIONS_ALERT_SELECTOR
+    );
 
-    const maxConnectionsH2 = document.querySelector(MAX_CONNECTIONS_H2_ID);
-    if (maxConnectionsH2?.innerText?.includes(REACHED_MAX_CONNECTIONS_TEXT)) {
-      console.log("Reached the weekly invitation limit!");
+    if (maxConnectionsAlert) {
+      console.log("Reached the weekly invitations limit!");
       return;
     }
 
-    const gotItButton = document.querySelector(GOT_IT_TEXT_ARIA_LABEL);
-    if (gotItButton) {
-      gotItButton.click();
-      await sleep();
-    }
-
+    connectionsMade++;
     if (connectionsMade >= MAX_CONNECTIONS_COUNT) {
-      console.log(`Reached the max invitation count:`, MAX_CONNECTIONS_COUNT);
+      console.log(`Reached the max invitations count:`, MAX_CONNECTIONS_COUNT);
       return;
     }
   }
